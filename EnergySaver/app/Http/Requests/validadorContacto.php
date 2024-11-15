@@ -4,7 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class validadorRegistro extends FormRequest
+
+class validadorContacto extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,14 +21,10 @@ class validadorRegistro extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-{
-    return [
-        'nombre' => 'required|string|max:255',
-        'apellidos' => 'required|string|max:255',
-        'fecha_nacimiento' => 'required|date',
-        'correo' => 'required|email:rfc,dns',
-        'password' => 'required|min:8|confirmed', 
-    ];
-}
-
+    {
+        return [
+            'nombre' => 'required|min:3|max:255',
+            'txtcorreo' => 'required|email:rfc,dns'
+        ];
+    }
 }

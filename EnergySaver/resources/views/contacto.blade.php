@@ -32,18 +32,20 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title text-center">Formulario de Contacto</h5>
-                        <form id="contactForm">
+                        <form action="{{route('enviaMensaje')}}" method="POST">
+                            @csrf
                             <div class="form-group">
-                                <label for="name">Nombre</label>
-                                <input type="text" class="form-control" id="name" name="nombre" placeholder="Introduce tu nombre" required>
+                                <label for="name">{{('Nombre')}}</label>
+                                <input type="text" class="form-control"  name="nombre" placeholder="Introduce tu nombre" value={{ old('nombre') }}>
+                                <small class="fst-italic text-danger" >{{ $errors->first('nombre') }}</small>
                             </div>
                             <div class="form-group">
                                 <label for="email">Correo Electrónico</label>
-                                <input type="email" class="form-control" id="email" name="correo" placeholder="Introduce tu correo electrónico" required>
+                                <input type="email" class="form-control"  name="correo" placeholder="Introduce tu correo electrónico" required>
                             </div>
                             <div class="form-group">
                                 <label for="message">Mensaje</label>
-                                <textarea class="form-control" id="message" name="mensaje" rows="4" placeholder="Escribe tu mensaje aquí" required></textarea>
+                                <textarea class="form-control"  name="mensaje" rows="4" placeholder="Escribe tu mensaje aquí" required></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Enviar</button>
                         </form>

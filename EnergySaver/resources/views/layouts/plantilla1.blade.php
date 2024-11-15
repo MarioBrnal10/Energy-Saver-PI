@@ -9,6 +9,7 @@
     @yield('css-formulario')
     <title>@yield('titulo')</title>
     @vite(['resources/js/app.js'])
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
 </head>
 <body>

@@ -9,19 +9,22 @@
 @section('login')
 <body style="margin: 0; font-family: Arial, sans-serif; background: url('img/Fondo.jpg') no-repeat center center fixed; background-size: cover; display: flex; justify-content: center; align-items: center; height: 100vh; color: #fff;">
     
-    @if(session('exito'))
-    <script>
-        Swal.fire({
-            title: "Inicio de sesión exitoso",
-            text: "{{ session('Correcto') }}",
-            icon: "success"
-        });
-    </script>    
-    @endif
+    
+
 
     <div class="login-container">
         <div class="login-form">
             <h1>Inicio de Sesión</h1>
+            @session('exito')
+            <script>
+              Swal.fire({
+                title: "Usuario Registrado Con Exito!",
+                text: '{{ $value }}',
+                icon: "success"
+              });
+
+            </script>
+            @endsession
             <form action="/entrar" method="POST">
                 @csrf
                 <label for="correo">Correo</label>

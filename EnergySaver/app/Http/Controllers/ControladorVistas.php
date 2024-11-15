@@ -16,9 +16,6 @@ class ControladorVistas extends Controller
         return view('calculadora');
     }
 
-    public function registro(){
-        return view('formulario');
-    }
 
     public function login(){
         return view('login');
@@ -36,9 +33,6 @@ class ControladorVistas extends Controller
         return view('vinculaciones');
     }
 
-    public function contactos(){
-        return view('contacto');
-    }
 
     public function visual(){
         return view('visualizacion');
@@ -46,6 +40,10 @@ class ControladorVistas extends Controller
 
     public function consejo(){
         return view('consejos');
+    }
+
+    public function Administrador(){
+        return view('panel');
     }
 
     public function inicioSesion(validadorLogin $peticion){
@@ -56,12 +54,5 @@ class ControladorVistas extends Controller
     return to_route('rutaLogin');
     }
 
-    public function Registrar(validadorRegistro $peticion2){
-        $usuario = $peticion2->input('nombre');
-
-        session()->flash('Guardado', 'Se ha Hecho un Registro Exitoso');
-
-        return to_route('rutaFormulario');
-    }
 
 }

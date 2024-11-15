@@ -6,21 +6,16 @@
     <link rel="stylesheet" href="{{ asset('css/formulario.css') }}">
 @endsection
 
-@session('Guardado')
-<script>
-    Swal.fire({
-        title: "Muy Bien!",
-        text: "Usuario Registrado!",
-        icon: "success"
-    });
-</script>    
-@endsession
+
 
 @section('formulario')
-<body style="margin: 0; font-family: Arial, sans-serif; background: url('img/Fondo.jpg') no-repeat center center fixed; background-size: cover;">
+<body style="margin: 0; font-family: Arial, sans-serif; background: url('{{ asset('img/Fondo.jpg') }}') no-repeat center center fixed; background-size: cover; display: flex; justify-content: center; align-items: center; height: 100vh; color: #fff;">
+
+    
     <div class="form-container">
         <h1>Registro</h1>
-        <form action="/enviarRegistro" method="POST">
+        
+        <form  action="{{ route('EnviarRegistro') }}" method="POST">
             @csrf
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" value="{{ old('nombre') }}">
@@ -39,11 +34,11 @@
             <small class="fst-italic text-danger">{{ $errors->first('correo') }}</small>
 
             <label for="password">Contraseña:</label>
-            <input type="txt" id="password" name="password">
+            <input type="password" id="password" name="password">
             <small class="fst-italic text-danger">{{ $errors->first('password') }}</small>
 
-            <label for="confirm_password">Confirmar Contraseña:</label>
-            <input type="txt" id="confirm_password" name="confirm_password">
+            <label for="password_confirmation">Confirmar Contraseña:</label>
+            <input type="password" id="confirm_password" name="password_confirmation">
             <small class="fst-italic text-danger">{{ $errors->first('confirm_password') }}</small>
 
             <button type="submit">Registrar</button>
@@ -51,5 +46,8 @@
         </form>
         <p>¿Ya tienes una cuenta? <a href="{{ route('rutaLogin') }}">Inicia sesión aquí</a></p>
     </div>
+
+    
+    
 </body>
 @endsection

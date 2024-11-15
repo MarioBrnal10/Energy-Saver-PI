@@ -1,0 +1,54 @@
+/* Estilo para la barra lateral */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #343a40; /* Color negro */
+    padding-top: 60px; /* Espacio debajo del botón de ocultar */
+    transition: transform 0.3s ease;
+}
+
+/* Colapso de la barra lateral */
+.sidebar.collapsed {
+    transform: translateX(-250px);
+}
+
+/* Estilo de enlaces de la barra lateral */
+.sidebar .nav-link {
+    color: #ffffff; /* Color blanco para los enlaces */
+}
+
+.sidebar .nav-link:hover {
+    color: #ff0000; /* Color rojo al pasar el mouse */
+}
+
+.sidebar .nav-link.active {
+    font-weight: bold;
+    color: #ffffff; /* Color blanco para el enlace activo */
+}
+
+/* Estilo para desplazar el contenido principal */
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.content.collapsed {
+    margin-left: 0;
+}
+
+/* Botón de hamburguesa */
+.toggle-btn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #ffffff; /* Color blanco para el icono */
+}
