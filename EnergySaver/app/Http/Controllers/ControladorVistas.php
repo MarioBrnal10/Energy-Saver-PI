@@ -43,7 +43,7 @@ class ControladorVistas extends Controller
     }
 
     public function Administrador(){
-        return view('panel');
+        return view('Admin');
     }
 
     public function inicioSesion(validadorLogin $peticion){

@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contacto', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('id_usuario');
-            $table->string('nombre');
-            $table->string('correo');
+        Schema::create('energias_renovables', function (Blueprint $table) {
+            $table->id('Id_sugerencias');
+            $table->text('Descripción');
+            $table->foreignId('Id_costos')->nullable()->constrained('costos')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contacto');
+        Schema::dropIfExists('energias_renovables');
     }
 };

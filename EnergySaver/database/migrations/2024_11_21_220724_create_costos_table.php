@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bitacora', function (Blueprint $table) {
+        Schema::create('costos', function (Blueprint $table) {
             $table->id();
-            $table->string('accion');
-            $table->date('fecha');
+            $table->string('Nombre', 100);
+            $table->decimal('Tarifa', 10, 2);
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bitacora');
+        Schema::dropIfExists('costos');
     }
 };

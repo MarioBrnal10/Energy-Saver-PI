@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('calculo', function (Blueprint $table) {
+        Schema::create('bitacora', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_usuario');
-            $table->unsignedBigInteger('id_electrodomestico');
-            $table->integer('horas_activas');
-            $table->decimal('consumo', 10, 2);
+            $table->string('accion', 255);
+            $table->timestamp('fecha')->useCurrent();
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('calculo');
+        Schema::dropIfExists('bitacora');
     }
 };

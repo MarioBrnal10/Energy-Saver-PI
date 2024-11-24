@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('modelo', function (Blueprint $table) {
+        Schema::create('calculos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->unsignedBigInteger('id_marca');
+            $table->foreignId('Id_usuario')->nullable()->constrained('usuarios')->onDelete('cascade');
+            $table->foreignId('Id_electrodomestico')->nullable()->constrained('electrodomesticos')->onDelete('cascade');
+            $table->integer('Horas_activas');
+            $table->decimal('Consumo', 10, 2);
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('modelo');
+        Schema::dropIfExists('calculos');
     }
 };

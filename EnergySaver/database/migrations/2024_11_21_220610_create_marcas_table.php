@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipo_electrodomestico', function (Blueprint $table) {
+        Schema::create('marcas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('Nombre', 100);
             $table->timestamps();
         });
     }
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipo_electrodomestico');
+        Schema::dropIfExists('marcas');
     }
 };

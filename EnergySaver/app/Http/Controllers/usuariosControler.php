@@ -22,27 +22,34 @@ class usuariosControler extends Controller
      */
     public function create()
     {
-        return view('formulario');
+        $generos = DB::table('generos')->select('id', 'nombre')->get();
+
+    return view('formulario', compact('generos'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(validadorRegistro $request)
-    {
-        DB::table('usuarios')->insert([
-            "nombre" => $request->input('nombre'),
-            "apellidos" => $request->input('apellidos'),
-            "fecha_nacimiento" => $request->input('fecha_nacimiento'),
-            "correo" => $request->input('correo'),
-            "password" => bcrypt($request->input('password')),
-            "created_at" => Carbon::now(),
-            "updated_at" => Carbon::now(),
-        ]);
-        $usuario = $request->input('nombre');
-        session()->flash('exito', 'Se guardo el usuario: '.$usuario);
-            return to_route('rutaLogin');
-    }
+{
+    DB::table('usuarios')->insert([
+        "Nombre" => $request->input('nombre'),
+        "Apellidos" => $request->input('apellidos'),
+        "Fecha_nacimiento" => $request->input('fecha_nacimiento'),
+        "Correo" => $request->input('correo'),
+        "Contraseña" => bcrypt($request->input('password')), // Cambiado a "Contraseña"
+        "Id_genero" => $request->input('genero'), // Cambiado a "Id_genero"
+        "created_at" => Carbon::now(),
+        "updated_at" => Carbon::now(),
+    ]);
+
+    $usuario = $request->input('nombre');
+    session()->flash('exito', 'Se guardó el usuario: ' . $usuario);
+
+    return to_route('rutaLogin');
+}
+
+
     
     /**
      * Display the specified resource.

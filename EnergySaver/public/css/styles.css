@@ -100,3 +100,12 @@ header h1 {
 .btn:active {
     background-color: #3e8e41; /* Verde más oscuro al hacer clic */
 }
+
+.nav-link img {
+    transition: filter 0.3s ease-in-out;
+    filter: grayscale(100%);
+}
+
+.nav-link:hover img {
+    filter: grayscale(0%);
+}
