@@ -14,11 +14,16 @@ class marcas extends Seeder
     public function run(): void
     {
         DB::table('marcas')->insert([
-            ['Nombre' => 'Samsung'],
             ['Nombre' => 'LG'],
+            ['Nombre' => 'Samsung'],
             ['Nombre' => 'Whirlpool'],
+            ['Nombre' => 'GE'],
             ['Nombre' => 'Bosch'],
-            ['Nombre' => 'Miele'],
+            ['Nombre' => 'Panasonic'],
+            ['Nombre' => 'Sony'],
+            ['Nombre' => 'Philips'],
+            ['Nombre' => 'Electrolux'],
+            ['Nombre' => 'Haier'],
         ]);
     }
 }

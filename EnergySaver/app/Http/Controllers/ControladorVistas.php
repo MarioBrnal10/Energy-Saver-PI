@@ -46,6 +46,10 @@ class ControladorVistas extends Controller
         return view('Admin');
     }
 
+    public function Contacto(){
+        return view('contacto');
+    }
+
     public function inicioSesion(validadorLogin $peticion){
     $correo = $peticion->input('correo');
 

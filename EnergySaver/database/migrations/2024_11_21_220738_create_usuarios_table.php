@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('Fecha_nacimiento');
             $table->string('Correo', 100)->unique();
             $table->string('Contraseña', 255);
+            $table->enum('role', ['user', 'admin'])->default('user'); // Campo para el rol
             $table->timestamps();
         });
     }

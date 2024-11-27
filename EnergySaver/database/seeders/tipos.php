@@ -16,9 +16,14 @@ class tipos extends Seeder
         DB::table('tipo_electrodomesticos')->insert([
             ['Nombre' => 'Refrigerador'],
             ['Nombre' => 'Lavadora'],
-            ['Nombre' => 'Lavavajillas'],
-            ['Nombre' => 'Horno'],
             ['Nombre' => 'Secadora'],
+            ['Nombre' => 'Horno'],
+            ['Nombre' => 'Microondas'],
+            ['Nombre' => 'Aire Acondicionado'],
+            ['Nombre' => 'Calefactor'],
+            ['Nombre' => 'Televisión'],
+            ['Nombre' => 'Licuadora'],
+            ['Nombre' => 'Tostadora'],
         ]);
     }
 }

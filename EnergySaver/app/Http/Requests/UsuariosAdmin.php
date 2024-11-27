@@ -24,9 +24,12 @@ class UsuariosAdmin extends FormRequest
         return [
         'nombre' => 'required|min:3|max:255',
         'apellidos' => 'required',
+        'fecha_nacimiento' => 'required|date',
         'correo' => 'required|email:rfc,dns',
         'password' => 'required|string|min:8|confirmed',
         'Id_genero' => 'required|exists:generos,id',
+        'tipo' => 'required|in:user,admin',
+
         ];
     }
 }

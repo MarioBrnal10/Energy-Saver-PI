@@ -4,30 +4,46 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\validadorLogin;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    public function showLoginForm()
+    {
+        return view('login'); 
+    }
+    // Manejar el inicio de sesión
     public function login(validadorLogin $request)
     {
+        // Autenticar al usuario utilizando los datos validados
+        if (Auth::attempt([
+            'Correo' => $request->input('correo'), // Asegúrate de que coincida con la base de datos
+            'password' => $request->input('contraseña'), // Laravel lo traduce a "Contraseña" gracias a getAuthPassword
+        ], $request->remember)) {
+            $request->session()->regenerate();
 
-        // Buscar el correo en la tabla de usuarios
-        $usuario = DB::table('usuarios')->where('Correo', $request->correo)->first();
-        if ($usuario && Hash::check($request->contraseña, $usuario->Contraseña)) {
-            // Redirigir a la vista de usuario
-            return view('home', ['usuario' => $usuario]);
+            // Redirigir según el rol del usuario
+            if (Auth::user()->role === 'admin') {
+                return redirect()->route('rutaAdmin'); // Redirige a la vista para administradores
+            }
+
+            return redirect()->route('rutaHome'); // Redirige a la vista para usuarios normales
         }
 
-        // Buscar el correo en la tabla de administradores
-        $admin = DB::table('administradores')->where('correo', $request->correo)->first();
-        if ($admin && Hash::check($request->contraseña, $admin->contraseña)) {
-            // Redirigir a la vista de administrador
-            return view('Admin', ['admin' => $admin]);
-        }
+        // Si la autenticación falla
+        return back()->withErrors([
+            'correo' => 'Las credenciales no coinciden con nuestros registros.',
+        ])->onlyInput('correo');
+    }
 
-        // Si no se encuentra en ninguna tabla
-        return back()->withErrors(['correo' => 'El correo o la contraseña son incorrectos.'])->withInput();
+    // Manejar el cierre de sesión
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('rutaLogin'); // Redirige al formulario de inicio de sesión
     }
 }
-

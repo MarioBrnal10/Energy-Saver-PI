@@ -37,15 +37,14 @@ class usuariosControler extends Controller
         "Apellidos" => $request->input('apellidos'),
         "Fecha_nacimiento" => $request->input('fecha_nacimiento'),
         "Correo" => $request->input('correo'),
-        "Contraseña" => bcrypt($request->input('password')), // Cambiado a "Contraseña"
-        "Id_genero" => $request->input('genero'), // Cambiado a "Id_genero"
+        "Contraseña" => bcrypt($request->input('password')),
+        "Id_genero" => $request->input('genero'),
+        "role" => $request->input('tipo'), // 'user' o 'admin'
         "created_at" => Carbon::now(),
         "updated_at" => Carbon::now(),
     ]);
 
-    $usuario = $request->input('nombre');
-    session()->flash('exito', 'Se guardó el usuario: ' . $usuario);
-
+    session()->flash('exito', 'Se guardó el usuario: ' . $request->input('nombre'));
     return to_route('rutaLogin');
 }
 

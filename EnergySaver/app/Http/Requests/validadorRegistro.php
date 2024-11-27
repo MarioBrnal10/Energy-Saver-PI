@@ -28,6 +28,8 @@ class validadorRegistro extends FormRequest
         'correo' => 'required|email:rfc,dns',
         'password' => 'required|min:8|confirmed',
         'genero' => 'required|exists:generos,id', 
+        'tipo' => 'required|in:user,admin',
+
     ];
 }
 

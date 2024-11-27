@@ -80,89 +80,85 @@
     </div>
 
     <script>
-        <!-- Script para generar el gráfico y manejar la lógica de consumo -->
-    document.addEventListener('DOMContentLoaded', function () {
-        // Intentar obtener datos del almacenamiento local; si no existen, establecer un arreglo vacío
-        var appliances = JSON.parse(localStorage.getItem('appliances')) || [];
+        document.addEventListener('DOMContentLoaded', function () {
+            // Obtener datos del almacenamiento local
+            var appliances = JSON.parse(localStorage.getItem('electrodomesticos')) || [];
     
-        // Esto garantiza que `appliances` tenga un valor, incluso si es un arreglo vacío
-        if (!localStorage.getItem('appliances')) {
-            localStorage.setItem('appliances', JSON.stringify([]));
-        }
+            // Referencias a los elementos del DOM
+            var consumptionChart = document.getElementById('consumptionChart');
+            var mostConsumptionMessage = document.getElementById('mostConsumptionMessage');
+            var totalConsumptionMessage = document.getElementById('totalConsumptionMessage');
+            var weeklyConsumptionMessage = document.getElementById('weeklyConsumptionMessage');
+            var monthlyConsumptionMessage = document.getElementById('monthlyConsumptionMessage');
     
-        // Referencias a los elementos del DOM
-        var consumptionChart = document.getElementById('consumptionChart');
-        var mostConsumptionMessage = document.getElementById('mostConsumptionMessage');
-        var totalConsumptionMessage = document.getElementById('totalConsumptionMessage');
-        var weeklyConsumptionMessage = document.getElementById('weeklyConsumptionMessage');
-        var monthlyConsumptionMessage = document.getElementById('monthlyConsumptionMessage');
+            // Verificar si hay datos en `electrodomesticos`
+            if (appliances.length === 0) {
+                consumptionChart.innerHTML = "<p style='text-align: center; color: gray;'>No hay datos disponibles</p>";
+                mostConsumptionMessage.style.display = 'none';
+                totalConsumptionMessage.style.display = 'none';
+                weeklyConsumptionMessage.style.display = 'none';
+                monthlyConsumptionMessage.style.display = 'none';
+                return;
+            }
     
-        // Verificar si hay datos en `appliances`
-        if (appliances.length === 0) {
-            // Si no hay datos, muestra un mensaje en el `div` de la gráfica y oculta los mensajes de consumo
-            consumptionChart.innerHTML = "<p style='text-align: center; color: gray;'>No hay datos disponibles</p>";
-            
-            mostConsumptionMessage.style.display = 'none';
-            totalConsumptionMessage.style.display = 'none';
-            weeklyConsumptionMessage.style.display = 'none';
-            monthlyConsumptionMessage.style.display = 'none';
-        } else {
-            // Si hay datos, genera la gráfica
-            var labels = appliances.map(function(appliance) {
-                return appliance.brandAppliance;
+            // Mapear los datos de `localStorage` para la gráfica
+            var labels = appliances.map(function (appliance) {
+                return appliance.equipo || 'Electrodoméstico sin nombre';
             });
-            var data = appliances.map(function(appliance) {
+    
+            var data = appliances.map(function (appliance) {
                 return {
-                    name: appliance.brandAppliance,
-                    y: appliance.monthlyConsumption,
-                    sliced: true,
-                    selected: true
+                    name: appliance.equipo || 'Sin nombre',
+                    y: appliance.consumo / 1000 // Convertir Wh a kWh
                 };
             });
-            var costs = appliances.map(function(appliance) {
-                return appliance.cost;
+    
+            var costs = appliances.map(function (appliance) {
+                return appliance.costo || 0;
             });
     
+            // Calcular valores totales
+            var totalConsumption = data.reduce((sum, d) => sum + d.y, 0);
+            var weeklyConsumption = (totalConsumption / 30) * 7;
+    
+            // Encontrar el electrodoméstico con mayor consumo
             var maxConsumption = Math.max(...data.map(d => d.y));
             var maxIndex = data.findIndex(d => d.y === maxConsumption);
             var mostConsumingAppliance = labels[maxIndex];
-            var maxCost = costs[maxIndex];
     
-            var totalConsumption = data.reduce((sum, d) => sum + d.y, 0);
-            var weeklyConsumption = totalConsumption / 30 * 7;
-            var monthlyConsumption = totalConsumption;
+            // Mostrar mensajes de consumo
+            mostConsumptionMessage.textContent =
+                `El electrodoméstico con más gasto en kWh es: ${mostConsumingAppliance}.`;
+            totalConsumptionMessage.textContent =
+                `Consumo total diario: ${(totalConsumption / 30).toFixed(2)} kWh.`;
+            weeklyConsumptionMessage.textContent =
+                `Consumo total semanal: ${weeklyConsumption.toFixed(2)} kWh.`;
     
-            mostConsumptionMessage.style.color = 'black';
-            totalConsumptionMessage.style.color = 'black';
-            weeklyConsumptionMessage.style.color = 'black';
-            monthlyConsumptionMessage.style.color = 'black';
-    
-            mostConsumptionMessage.textContent = `El electrodoméstico con más gasto en kWh es: ${mostConsumingAppliance} con un costo mensual de $${maxCost.toFixed(2)}.`;
-    
-            if (monthlyConsumption <= 300) {
+            var consumptionLevel = '';
+            if (totalConsumption <= 300) {
+                monthlyConsumptionMessage.textContent = `Consumo total mensual: ${totalConsumption.toFixed(2)} kWh. El consumo es bajo.`;
                 monthlyConsumptionMessage.className = 'consumo-bajo';
-                monthlyConsumptionMessage.textContent = `Consumo total mensual: ${monthlyConsumption.toFixed(2)} kWh. El consumo es bajo.`;
-                localStorage.setItem('consumptionLevel', 'bajo');
-            } else if (monthlyConsumption <= 900) {
+                consumptionLevel = 'bajo';
+            } else if (totalConsumption <= 900) {
+                monthlyConsumptionMessage.textContent = `Consumo total mensual: ${totalConsumption.toFixed(2)} kWh. El consumo es moderado.`;
                 monthlyConsumptionMessage.className = 'consumo-moderado';
-                monthlyConsumptionMessage.textContent = `Consumo total mensual: ${monthlyConsumption.toFixed(2)} kWh. El consumo es moderado.`;
-                localStorage.setItem('consumptionLevel', 'moderado');
+                consumptionLevel = 'moderado';
             } else {
+                monthlyConsumptionMessage.textContent = `Consumo total mensual: ${totalConsumption.toFixed(2)} kWh. El consumo es alto.`;
                 monthlyConsumptionMessage.className = 'consumo-alto';
-                monthlyConsumptionMessage.textContent = `Consumo total mensual: ${monthlyConsumption.toFixed(2)} kWh. El consumo es alto.`;
-                localStorage.setItem('consumptionLevel', 'alto');
+                consumptionLevel = 'alto';
             }
     
-            totalConsumptionMessage.textContent = `Consumo total diario: ${(totalConsumption / 30).toFixed(2)} kWh.`;
-            weeklyConsumptionMessage.textContent = `Consumo total semanal: ${weeklyConsumption.toFixed(2)} kWh.`;
+            // Guardar nivel de consumo en localStorage
+            localStorage.setItem('consumptionLevel', consumptionLevel);
     
-            // Ajuste de la posición de la flecha
+            // Ajuste de la posición de la flecha en la barra de colores
             var arrow = document.getElementById('consumptionArrow');
-            var arrowPosition = (monthlyConsumption / 900) * 100; // Suponiendo que 900 kWh es el máximo
-            if (arrowPosition > 100) arrowPosition = 100; // Limitar a 100%
-            arrow.style.top = (100 - arrowPosition) + '%'; // Invertir el porcentaje para la posición
+            var arrowPosition = (totalConsumption / 900) * 100; // Suponiendo que 900 kWh es el máximo
+            if (arrowPosition > 100) arrowPosition = 100;
+            arrow.style.top = (100 - arrowPosition) + '%';
     
-            // Configuración de la gráfica con Highcharts
+            // Configuración de Highcharts
             Highcharts.chart('consumptionChart', {
                 chart: {
                     type: 'pie',
@@ -170,8 +166,7 @@
                         enabled: true,
                         alpha: 45,
                         beta: 0,
-                        depth: 70,
-                        viewDistance: 25
+                        depth: 70
                     }
                 },
                 title: {
@@ -187,8 +182,7 @@
                         depth: 35,
                         dataLabels: {
                             enabled: true,
-                            format: '{point.name}: {point.percentage:.1f} %',
-                            connectorColor: 'silver'
+                            format: '{point.name}: {point.percentage:.1f} %'
                         },
                         showInLegend: true
                     }
@@ -198,8 +192,12 @@
                     data: data
                 }]
             });
-        }
-    });
+        });
     </script>
+    
+    
+    
+
+    
     
 @endsection

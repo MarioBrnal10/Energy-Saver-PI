@@ -107,3 +107,19 @@ th {
     background-color: #4CAF50;
     color: white;
 }
+
+/* Mantener los links centrados */
+.navbar-nav {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+/* Contenedor del botón "Cerrar sesión" alineado a la derecha */
+.logout-container {
+    margin-left: auto; /* Empuja el botón hacia la derecha */
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo del botón "Cerrar sesión" */

@@ -42,14 +42,16 @@ class UsuariosAdminController extends Controller
      */
     public function store(UsuariosAdmin $request)
     {
-        DB::table('administradores')->insert([
-            'nombre' => $request->input('nombre'),
-            'apellidos' => $request->input('apellidos'),
-            'correo' => $request->input('correo'),
-            'contraseña' =>     ($request->input('password')),
-            'Id_genero' => $request->input('Id_genero'),
-            'created_at' => now(),
-            'updated_at' => now(),
+        DB::table('usuarios')->insert([
+            "Nombre" => $request->input('nombre'),
+            "Apellidos" => $request->input('apellidos'),
+            "Fecha_nacimiento" => $request->input('fecha_nacimiento'),
+            "Correo" => $request->input('correo'),
+            "Contraseña" => bcrypt($request->input('password')),
+            "Id_genero" => $request->input('genero'),
+            "role" => $request->input('tipo'), // 'user' o 'admin'
+            "created_at" => Carbon::now(),
+            "updated_at" => Carbon::now(),
         ]);
 
         $usuario = $request->input('nombre');

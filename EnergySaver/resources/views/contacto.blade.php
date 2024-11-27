@@ -32,7 +32,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title text-center">Formulario de Contacto</h5>
-                        <form action="{{route('enviaMensaje')}}" method="POST">
+                        <form action="" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="name">{{('Nombre')}}</label>

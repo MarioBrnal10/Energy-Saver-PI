@@ -51,3 +51,24 @@
 .form-container button:hover {
     background: #4a90e2;
 }
+
+/* Texto de cierre de sesión */
+.logout-text {
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s; /* Suavizar cambio de color */
+}
+
+/* Efecto al pasar el mouse por el botón */
+.logout-button:hover .logout-icon {
+    filter: brightness(1.2);
+    transform: scale(1.1);
+}
+
+.logout-button:hover + .logout-text,
+.logout-button:hover .logout-text {
+    color: #0078FF; /* Azul especificado */
+}
+

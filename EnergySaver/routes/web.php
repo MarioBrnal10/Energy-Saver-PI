@@ -1,18 +1,20 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\calculosControler;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControladorVistas;
+use App\Http\Controllers\ElectrodomesticoController;
 use App\Http\Controllers\UsuariosAdminController;
 use App\Http\Controllers\usuariosControler;
 
 Route::get('/', [ControladorVistas::class, 'welcome'])->name('rutaInicio');
 Route::get('/Calculadora', [ControladorVistas::class, 'calculadora'])->name('rutaCalculadora');
-Route::get('/login', [ControladorVistas::class, 'login'])->name('rutaLogin');
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('rutaLogin');
 Route::get('/home', [ControladorVistas::class, 'home'])->name('rutaHome');
 Route::get('/calcu', [ControladorVistas::class, 'calcula'])->name('rutaCalcu');
 Route::get('/vinculaciones', [ControladorVistas::class, 'vinculacion'])->name('rutaVinculaciones');
-Route::get('/contactos', [ControladorVistas::class, 'contactos'])->name('rutaContacto');
+Route::get('/contactos', [ControladorVistas::class, 'Contacto'])->name('rutaContacto');
 Route::get('/visual', [ControladorVistas::class, 'visual'])->name('rutaVisual');
 Route::get('/consejos', [ControladorVistas::class, 'consejo'])->name('rutaConsejos');
 
@@ -41,5 +43,16 @@ Route::get('/Visual/Usua', [UsuariosAdminController::class,'indexUsuarios'])->na
 
 //Ruta para validar si es administrador o usuario
 Route::post('/entrar', [AuthController::class, 'login'])->name('login');
+
+//Rutas para Envio de Datos a La Calculadora
+Route::get('/marcas', [ElectrodomesticoController::class, 'getMarcas']);
+Route::get('/electrodomesticos', [ElectrodomesticoController::class, 'getElectrodomesticos']);
+Route::get('/potencia', [ElectrodomesticoController::class, 'getPotencia']);
+Route::get('/tipos-electrodomesticos', [ElectrodomesticoController::class, 'getTiposPorMarca']);
+
+Route::post('/guardar-calculos', [calculosControler::class, 'guardarCalculos'])->middleware('auth')->name('guardarCalculos');
+Route::post('/logout', [AuthController::class, 'logout'])->name('rutaSalir');
+
+
 
 

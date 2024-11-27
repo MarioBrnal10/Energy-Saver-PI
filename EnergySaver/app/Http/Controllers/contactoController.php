@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
-use App\Http\Requests\validadorClientes;
 
-class contactoControler extends Controller
+class contactoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +19,7 @@ class contactoControler extends Controller
      */
     public function create()
     {
-        return view('contacto');
+        
     }
 
     /**
