@@ -61,14 +61,4 @@
     transition: color 0.3s; /* Suavizar cambio de color */
 }
 
-/* Efecto al pasar el mouse por el botón */
-.logout-button:hover .logout-icon {
-    filter: brightness(1.2);
-    transform: scale(1.1);
-}
-
-.logout-button:hover + .logout-text,
-.logout-button:hover .logout-text {
-    color: #0078FF; /* Azul especificado */
-}
 

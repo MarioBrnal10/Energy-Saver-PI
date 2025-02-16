@@ -38,7 +38,6 @@
                     <label for="remember">Recuérdame</label>
                 </div>
                 <button type="submit">Entrar</button>
-                <button class="btn" onclick="window.location.href='{{ route('rutaInicio') }}'">Regresar a Inicio</button>
             </form>
         </div>
         <div class="login-bg"></div>

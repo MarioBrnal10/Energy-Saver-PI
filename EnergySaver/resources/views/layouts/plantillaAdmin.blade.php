@@ -13,24 +13,7 @@
     @yield('css-admi')
     @yield('css-AdminUsuariosForm')
 </head>
-<style>
-    .nav-link {
-        position: relative;
-        display: flex;
-        align-items: center;
-        padding: 10px;
-        border-radius: 5px;
-        transition: background-color 0.3s ease-in-out;
-    }
 
-    .nav-link:hover {
-        background-color: #007BFF; /* Fondo azul al pasar el mouse */
-    }
-
-    .nav-link img {
-        transition: transform 0.3s ease-in-out; /* Suaviza el movimiento si deseas agregar efectos */
-    }
-</style>
 
 <body style="margin: 0; font-family: Arial, sans-serif; background: url('{{ asset('img/FA4.jpg') }}') no-repeat center center fixed; background-size: cover;">
     <div class="d-flex">

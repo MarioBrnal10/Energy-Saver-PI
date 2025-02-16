@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\ElectrodomesticoController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,6 +32,6 @@ class Calculo extends Model
     // Relación con electrodomésticos
     public function electrodomestico()
     {
-        return $this->belongsTo(Electrodomestico::class, 'id_electrodomestico');
+        return $this->belongsTo(ElectrodomesticoController::class, 'id_electrodomestico');
     }
 }
