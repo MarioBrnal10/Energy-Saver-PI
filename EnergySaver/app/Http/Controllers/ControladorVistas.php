@@ -58,5 +58,12 @@ class ControladorVistas extends Controller
     return to_route('rutaLogin');
     }
 
+    public function chatbot(){
+        return view('chatbot');
+    }
+
+    public function usuario(){
+        return view('infoUsuarios');
+    }
 
 }

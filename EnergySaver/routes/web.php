@@ -7,6 +7,11 @@ use App\Http\Controllers\ControladorVistas;
 use App\Http\Controllers\ElectrodomesticoController;
 use App\Http\Controllers\UsuariosAdminController;
 use App\Http\Controllers\usuariosControler;
+use App\Http\Controllers\ChatbotController;
+use App\Http\Controllers\infoUsuario;
+
+
+
 
 Route::get('/', [ControladorVistas::class, 'welcome'])->name('rutaInicio');
 Route::get('/Calculadora', [ControladorVistas::class, 'calculadora'])->name('rutaCalculadora');
@@ -53,6 +58,12 @@ Route::get('/tipos-electrodomesticos', [ElectrodomesticoController::class, 'getT
 Route::post('/guardar-calculos', [calculosControler::class, 'guardarCalculos'])->middleware('auth')->name('guardarCalculos');
 Route::post('/logout', [AuthController::class, 'logout'])->name('rutaSalir');
 
+//Rutas para el chatbot
+Route::get('/chatbot',[ControladorVistas::class, 'chatbot'])->name('rutaChatBot');
+Route::get('/chatbot/inicio', [ChatBotController::class, 'index'])->name('chatbot');
+Route::post('/chatbot/mensaje', [ChatBotController::class, 'procesarMensaje'])->name('chatbot.mensaje');
+Route::post('/chatbot/procesar', [ChatbotController::class, 'procesar'])->name('chatbot.procesar');
 
-
-
+//Rutas para edicion de usuarios
+Route::get('/usuarios', [ControladorVistas::class, 'usuario'])->name('infoUsuario');
+Route::patch('/usuario/{id}', [UsuarioController::class, 'update'])->name('usuario.update');

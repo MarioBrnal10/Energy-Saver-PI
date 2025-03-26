@@ -12,6 +12,8 @@
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs/build/css/alertify.min.css"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs/build/css/themes/default.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-3d.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -58,6 +60,32 @@
             font-size: 14px;
             color: white;
         }
+
+        .chatbot-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #007bff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        .chatbot-icon:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        .chatbot-icon img {
+            width: 35px;
+            height: 35px;
+        }
     </style>
     
     
@@ -85,6 +113,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('rutaContacto') }}" style="color: #c4d7e0; font-weight: bold; padding: 8px 20px; text-align: center;">
                             Contacto
+                        </a>
+                    </li>
+                    <li class="d-flex">
+                        <a href="{{ route('infoUsuario')}}" class="nav-link">
+                            <i class="fas fa-user-circle" style="font-size: 1.5em; color: #c4d7e0;"></i>
                         </a>
                     </li>
                 </ul>
@@ -119,6 +152,14 @@
             @yield('contenidoConsejos')
         </div>
 
+        <div class="content">
+            @yield('contenidoChatbot')
+        </div>
+
+        <div class="content">
+            @yield('EditarUsuarios')
+        </div>
+
         <div class="logout-container">
             <form id="rutaSalir" action="{{ route('rutaSalir') }}" method="POST">
                 @csrf
@@ -128,6 +169,8 @@
                 </button>
             </form>
         </div>
+
+
         
 
         <script>
@@ -155,6 +198,16 @@
                 });
             });
         </script>
+
+        <div class="chatbot-icon" onclick="openChat()">
+            <img src="https://cdn-icons-png.flaticon.com/512/4712/4712037.png" alt="Chatbot">
+        </div>
+
+        <script>
+             function openChat() {
+                window.location.href = "{{ route('rutaChatBot') }}";            }
+        </script>
+
         
         
         <script src="https://cdn.jsdelivr.net/npm/alertifyjs/build/alertify.min.js"></script>
