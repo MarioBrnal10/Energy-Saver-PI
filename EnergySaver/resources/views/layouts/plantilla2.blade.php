@@ -28,21 +28,21 @@
     <style>
         /* Barra de navegación mejorada */
         nav.navbar {
-            background: linear-gradient(135deg,rgb(66, 148, 63),rgb(49, 128, 49));
-            padding: 20px 0;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            border-bottom: 2px solid #16a085;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
+        background: linear-gradient(135deg, rgb(66, 148, 63), rgb(49, 128, 49));
+        padding: 20px 0;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        transition: transform 0.9s ease, background-color 0.3s ease;
+        border-bottom: 2px solid #16a085;
+        position: fixed;
+        width: 100%;
+        top: -80px; /* Se oculta inicialmente */
+        z-index: 1000;
+    }
 
-        nav.navbar:hover {
-            background: linear-gradient(135deg, #00b894, #16a085);
-            transform: translateY(-5px);
-        }
+    /* Muestra la barra al pasar el cursor cerca del borde superior */
+    body:hover nav.navbar {
+        transform: translateY(80px);
+    }
 
         .navbar-nav {
             display: flex;
@@ -299,9 +299,26 @@
         function openChat() {
             window.location.href = "{{ route('rutaChatBot') }}";
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+        const navbar = document.querySelector("nav.navbar");
+        let timeout;
+
+        document.addEventListener("mousemove", function (event) {
+            if (event.clientY < 100) {
+                navbar.style.transform = "translateY(80px)";
+                clearTimeout(timeout);
+            } else {
+                timeout = setTimeout(() => {
+                    navbar.style.transform = "translateY(-80px)";
+                }, 1500);
+            }
+        });
+    });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/alertifyjs/build/alertify.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
 </body>
 </html>
