@@ -263,6 +263,10 @@
         @yield('EditarUsuarios')
     </div>
 
+    <div class="content">
+        @yield('UsuariosInfo')
+    </div>
+
     <div class="logout-container">
         <form id="rutaSalir" action="{{ route('rutaSalir') }}" method="POST">
             @csrf
