@@ -3,21 +3,177 @@
 @section('titulo', 'Home')
 
 @section('css-estilos')
-    <link rel="stylesheet" href="{{asset('css/estilos.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
+    <style>
+        body {
+            background-color:rgb(171, 172, 171); /* Fondo suave verde claro */
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            text-align: center;
+            color: #34495e; /* Color de texto suave y elegante */
+            background-color:rgb(216, 216, 216); /* Fondo blanco para el contenido */
+            padding: 40px 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: 80px auto;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        h1 {
+            font-size: 3.2em;
+            color: #1abc9c; /* Verde fresco para resaltar */
+            margin-bottom: 25px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-top: 20px;
+            line-height: 1.5;
+            color: #2c3e50;
+            animation: slideUp 1s ease-out;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            animation: slideUp 1s ease-out;
+        }
+
+        li {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #2ecc71;
+            animation: bounce 1.5s ease-in-out infinite;
+            font-weight: 500;
+        }
+
+        li:nth-child(even) {
+            color: #16a085;
+        }
+
+        li:nth-child(odd) {
+            color: #1abc9c;
+        }
+
+        /* Iconos más pequeños y bonitos */
+        .icon {
+            font-size: 2em;
+            color: #ff9f43;
+            margin-right: 12px;
+            animation: pulse 2s infinite alternate;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #1abc9c;
+            color: white;
+            font-size: 1.2em;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s ease-in-out;
+        }
+
+        .button:hover {
+            background-color: #16a085;
+            transform: scale(1.1);
+        }
+
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        /* Imagen dentro de la bienvenida */
+        .image-container {
+            margin-top: 30px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .image-container img {
+            max-width: 60%;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.2);
+            }
+        }
+    </style>
 @endsection
 
 @section('contenidoHome')
+    <div class="container">
+        <h1>Bienvenido a </h1>
+        <div class="image-container">
+         <img src="{{ asset('img/LETRAS3.jpg') }}" alt="Energía eficiente">
+         </div>
+        <br> <!-- Salto de línea -->
+        <br>
+         <p>¡Nos alegra verte aquí! Juntos podemos reducir tu consumo eléctrico y mejorar la eficiencia energética de tu hogar.</p>
 
-<div class="container">
-    <h1>Bienvenido a Energy Saver</h1>
-    <p>Nuestra misión es ayudarte a conocer más a detalle el consumo eléctrico de tu hogar, ofreciéndote recomendaciones que te permitan reducir el consumo y ahorrar en tus facturas de energía.</p>
-    <p>En nuestra página podrás:</p>
-    <ul>
-        <li>Encontrar consejos prácticos y guías para reducir el consumo energético y mejorar la eficiencia energética en tu hogar.</li>
-        <li>Contactar con nosotros para recibir asesoramiento personalizado y resolver cualquier duda que puedas tener.</li>
-        <li>Conocer acerca de energías renovables y ponerte en contacto con la empresas para brindarte más información si es de tu interés.</li>
-    </ul>
-    <p>¡Empieza hoy mismo tu camino hacia un hogar más eficiente y sostenible con Energy Saver!</p>
-</div>
+        <p>¿Qué puedes hacer en Energy Saver?</p>
+        <ul>
+            <li><i class="fas fa-bolt icon"></i> Descubre consejos prácticos para ahorrar energía.</li>
+            <li><i class="fas fa-phone-alt icon"></i> Contáctanos para recibir asesoramiento personalizado.</li>
+            <li><i class="fas fa-solar-panel icon"></i> Aprende sobre energías renovables y opciones sostenibles.</li>
+        </ul>
+        <p>¡Empieza hoy mismo tu camino hacia un hogar más eficiente y sostenible!</p>
+        <a href="#" class="button">Comienza ahora</a>
 
+        <!-- Agregamos la imagen -->
+        
+    </div>
 @endsection
+
+
+
+

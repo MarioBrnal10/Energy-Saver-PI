@@ -7,7 +7,7 @@
 @endsection
 
 @section('login')
-<body style="margin: 0; font-family: Arial, sans-serif; background: url('img/Fondo.jpg') no-repeat center center fixed; background-size: cover; display: flex; justify-content: center; align-items: center; height: 100vh; color: #fff;">
+<body style="margin: 0; font-family: Arial, sans-serif; background: url('img/FONDO4.jpg') no-repeat center center fixed; background-size: cover; display: flex; justify-content: center; align-items: center; height: 100vh; color: #fff;">
     
     
 

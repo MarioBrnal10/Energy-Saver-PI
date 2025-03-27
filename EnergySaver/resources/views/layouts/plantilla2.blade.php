@@ -9,52 +9,115 @@
     <link rel="icon" href="{{ asset('img/logotipo.ico') }}" type="image/x-icon">
     <title>@yield('titulo')</title>
     @vite(['resources/js/app.js'])
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs/build/css/alertify.min.css"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs/build/css/themes/default.min.css"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs/build/css/themes/default.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/highcharts-3d.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
-
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
     @yield('css-estilos')
     @yield('css-vista')
     @yield('css-estilo')
     @yield('css-calcu')
+
     <style>
+        /* Barra de navegación mejorada */
+        nav.navbar {
+            background: linear-gradient(135deg,rgb(66, 148, 63),rgb(49, 128, 49));
+            padding: 20px 0;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-bottom: 2px solid #16a085;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav.navbar:hover {
+            background: linear-gradient(135deg, #00b894, #16a085);
+            transform: translateY(-5px);
+        }
+
+        .navbar-nav {
+            display: flex;
+            justify-content: center; /* Centra los elementos */
+            gap: 40px;
+            flex-wrap: wrap;
+            align-items: center;
+            width: 100%;
+        }
+
+        .navbar-nav .nav-item {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: #fff !important;
+            font-weight: bold;
+            padding: 12px 24px;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 1.1em;
+            position: relative;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-item .nav-link:hover {
+            color: #fff !important;
+            background: rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-nav .nav-item .nav-link.active {
+            border-bottom: 3px solid #16a085;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Posicionar el botón de cerrar sesión en la esquina inferior izquierda */
         .logout-container {
             position: fixed;
-            bottom: 20px; /* Espaciado desde abajo */
-            left: 20px; /* Espaciado desde la izquierda */
+            bottom: 20px;
+            left: 20px;
             display: flex;
             align-items: center;
-            background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro translúcido */
+            background-color: rgba(0, 0, 0, 0.8);
             padding: 10px 15px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             transition: background-color 0.3s ease, transform 0.3s ease;
             color: white;
         }
-    
-        /* Efecto al pasar el mouse */
+
         .logout-container:hover {
-            background-color: #007BFF; /* Cambiar fondo a azul */
-            transform: scale(1.05); /* Aumentar ligeramente el tamaño */
+            background-color: #007BFF;
+            transform: scale(1.05);
         }
-    
-        /* Imagen del botón */
+
         .logout-icon {
-            margin-right: 10px; /* Espaciado entre el icono y el texto */
-            width: 30px; /* Tamaño del icono */
+            margin-right: 10px;
+            width: 30px;
             height: 30px;
         }
-    
-        /* Texto del botón */
+
         .logout-text {
             font-weight: bold;
             font-size: 14px;
@@ -86,131 +149,159 @@
             width: 35px;
             height: 35px;
         }
+
+        /* Barra de navegación fija en la parte superior */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url('{{ asset('img/FONDO4.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-top: 100px; /* espacio para la barra de navegación */
+        }
+
+        .navbar-toggler-icon {
+            color: #fff;
+        }
+
+        /* Estilo para la bienvenida */
+        .welcome-message {
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 100px; /* ajusta según sea necesario */
+            animation: slideUp 1s ease-in-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
-    
-    
 </head>
-<body style="margin: 0; font-family: Arial, sans-serif; background: url('{{ asset('img/Fondo.jpg') }}') no-repeat center center fixed; background-size: cover;">
-    <nav class="navbar navbar-expand-lg" style="background-color: #1a1f26; padding: 20px 0;">
+
+<body>
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav" style="margin: 0 auto;">
+                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('rutaHome') }}" style="color: #c4d7e0; font-weight: bold; padding: 8px 20px; text-align: center;">
+                        <a class="nav-link active" aria-current="page" href="{{ route('rutaHome') }}">
                             Inicio
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('rutaCalcu') }}" style="color: #c4d7e0; font-weight: bold; padding: 8px 20px; text-align: center;">
+                        <a class="nav-link" href="{{ route('rutaCalcu') }}">
                             Calculadora
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('rutaVinculaciones') }}" style="color: #c4d7e0; font-weight: bold; padding: 8px 20px; text-align: center;">
+                        <a class="nav-link" href="{{ route('rutaVinculaciones') }}">
                             Asociaciones
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('rutaContacto') }}" style="color: #c4d7e0; font-weight: bold; padding: 8px 20px; text-align: center;">
+                        <a class="nav-link" href="{{ route('rutaContacto') }}">
                             Contacto
                         </a>
                     </li>
                     <li class="d-flex">
                         <a href="{{ route('infoUsuario')}}" class="nav-link">
-                            <i class="fas fa-user-circle" style="font-size: 1.5em; color: #c4d7e0;"></i>
+                            <i class="fas fa-user-circle" style="font-size: 1.5em;"></i>
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    
-    
-    
 
-        <div class="content">
-            @yield('contenidoHome')
-        </div>
+    <div class="content">
+        @yield('contenidoHome')
+    </div>
 
-        <div class="content">
-            @yield('contenidoCalcu')
-        </div>
+    <div class="content">
+        @yield('contenidoCalcu')
+    </div>
 
-        <div class="content">
-            @yield('contenidoVinculacion')
-        </div>
+    <div class="content">
+        @yield('contenidoVinculacion')
+    </div>
 
-        <div class="content">
-            @yield('contenidoContacto')
-        </div>
+    <div class="content">
+        @yield('contenidoContacto')
+    </div>
 
-        <div class="content">
-            @yield('contenidoVista')
-        </div>
+    <div class="content">
+        @yield('contenidoVista')
+    </div>
 
-        <div class="content">
-            @yield('contenidoConsejos')
-        </div>
+    <div class="content">
+        @yield('contenidoConsejos')
+    </div>
 
-        <div class="content">
-            @yield('contenidoChatbot')
-        </div>
+    <div class="content">
+        @yield('contenidoChatbot')
+    </div>
 
-        <div class="content">
-            @yield('EditarUsuarios')
-        </div>
+    <div class="content">
+        @yield('EditarUsuarios')
+    </div>
 
-        <div class="logout-container">
-            <form id="rutaSalir" action="{{ route('rutaSalir') }}" method="POST">
-                @csrf
-                <button type="submit" class="logout-button" style="background: none; border: none; display: flex; align-items: center; cursor: pointer;">
-                    <img src="{{ asset('img/check-out.png') }}" alt="Cerrar sesión" class="logout-icon" />
-                    <span class="logout-text">Cerrar sesión</span>
-                </button>
-            </form>
-        </div>
+    <div class="logout-container">
+        <form id="rutaSalir" action="{{ route('rutaSalir') }}" method="POST">
+            @csrf
+            <button type="submit" class="logout-button">
+                <img src="{{ asset('img/check-out.png') }}" alt="Cerrar sesión" class="logout-icon" />
+                <span class="logout-text">Cerrar sesión</span>
+            </button>
+        </form>
+    </div>
 
-
-        
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                // Seleccionamos el formulario y el botón
-                const logoutForm = document.getElementById("rutaSalir");
-        
-                // Agregamos un evento de envío al formulario
-                logoutForm.addEventListener("submit", function (e) {
-                    e.preventDefault(); // Evita el envío inmediato del formulario
-        
-                    // Muestra la alerta de confirmación con Alertify.js
-                    alertify.confirm(
-                        "Confirmación de Cierre de Sesión",
-                        "¿Estás seguro de que deseas cerrar sesión?",
-                        function () {
-                            // Si el usuario confirma, envía el formulario
-                            logoutForm.submit();
-                        },
-                        function () {
-                            // Si el usuario cancela, no pasa nada
-                            alertify.error("Acción cancelada");
-                        }
-                    );
-                });
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const logoutForm = document.getElementById("rutaSalir");
+            logoutForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                alertify.confirm(
+                    "Confirmación de Cierre de Sesión",
+                    "¿Estás seguro de que deseas cerrar sesión?",
+                    function () {
+                        logoutForm.submit();
+                    },
+                    function () {
+                        alertify.error("Acción cancelada");
+                    }
+                );
             });
-        </script>
+        });
+    </script>
 
-        <div class="chatbot-icon" onclick="openChat()">
-            <img src="https://cdn-icons-png.flaticon.com/512/4712/4712037.png" alt="Chatbot">
-        </div>
+    <div class="chatbot-icon" onclick="openChat()">
+        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712037.png" alt="Chatbot">
+    </div>
 
-        <script>
-             function openChat() {
-                window.location.href = "{{ route('rutaChatBot') }}";            }
-        </script>
+    <script>
+        function openChat() {
+            window.location.href = "{{ route('rutaChatBot') }}";
+        }
+    </script>
 
-        
-        
-        <script src="https://cdn.jsdelivr.net/npm/alertifyjs/build/alertify.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs/build/alertify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
