@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
     <style>
         body {
-            background-color:rgb(171, 172, 171); /* Fondo suave verde claro */
+            background-color: rgb(171, 172, 171); /* Fondo suave verde claro */
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
@@ -15,7 +15,7 @@
         .container {
             text-align: center;
             color: #34495e; /* Color de texto suave y elegante */
-            background-color:rgb(216, 216, 216); /* Fondo blanco para el contenido */
+            background-color: rgb(255, 255, 255); /* Fondo blanco para el contenido */
             padding: 40px 30px;
             border-radius: 15px;
             max-width: 600px;
@@ -26,8 +26,9 @@
 
         h1 {
             font-size: 3.2em;
-            color: #1abc9c; /* Verde fresco para resaltar */
+            color: #388e3c; /* Verde fresco para resaltar */
             margin-bottom: 25px;
+            font-weight: bold;
             animation: fadeIn 1s ease-out;
         }
 
@@ -71,7 +72,7 @@
 
         .button {
             display: inline-block;
-            background-color: #1abc9c;
+            background-color: #388e3c;
             color: white;
             font-size: 1.2em;
             padding: 12px 28px;
@@ -83,7 +84,7 @@
         }
 
         .button:hover {
-            background-color: #16a085;
+            background-color: #2e7d32;
             transform: scale(1.1);
         }
 
@@ -147,18 +148,32 @@
                 transform: scale(1.2);
             }
         }
+
+        /* Estilo para los iconos de redes sociales */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            font-size: 2em;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #388e3c;
+        }
     </style>
 @endsection
 
 @section('contenidoHome')
     <div class="container">
-        <h1>Bienvenido a </h1>
-        <div class="image-container">
-         <img src="{{ asset('img/LETRAS3.jpg') }}" alt="Energía eficiente">
-         </div>
-        <br> <!-- Salto de línea -->
-        <br>
-         <p>¡Nos alegra verte aquí! Juntos podemos reducir tu consumo eléctrico y mejorar la eficiencia energética de tu hogar.</p>
+        <h1>Bienvenido a Energy Saver</h1>
+
+        <p>¡Nos alegra verte aquí! Juntos podemos reducir tu consumo eléctrico y mejorar la eficiencia energética de tu hogar.</p>
 
         <p>¿Qué puedes hacer en Energy Saver?</p>
         <ul>
@@ -166,14 +181,16 @@
             <li><i class="fas fa-phone-alt icon"></i> Contáctanos para recibir asesoramiento personalizado.</li>
             <li><i class="fas fa-solar-panel icon"></i> Aprende sobre energías renovables y opciones sostenibles.</li>
         </ul>
+
         <p>¡Empieza hoy mismo tu camino hacia un hogar más eficiente y sostenible!</p>
+
         <a href="#" class="button">Comienza ahora</a>
 
-        <!-- Agregamos la imagen -->
-        
+        <!-- Redes sociales (ejemplo de iconos) -->
+        <div class="social-icons">
+            <a href="#" class="fab fa-facebook"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-google"></a>
+        </div>
     </div>
 @endsection
-
-
-
-

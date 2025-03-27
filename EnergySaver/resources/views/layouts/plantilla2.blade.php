@@ -193,42 +193,43 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('rutaHome') }}">
-                            Inicio
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('rutaCalcu') }}">
-                            Calculadora
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('rutaVinculaciones') }}">
-                            Asociaciones
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('rutaContacto') }}">
-                            Contacto
-                        </a>
-                    </li>
-                    <li class="d-flex">
-                        <a href="{{ route('infoUsuario')}}" class="nav-link">
-                            <i class="fas fa-user-circle" style="font-size: 1.5em;"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('rutaHome') }}">
+                        <i class="fas fa-home" style="font-size: 1.2em;"></i> Inicio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('rutaCalcu') }}">
+                        <i class="fas fa-calculator" style="font-size: 1.2em;"></i> Calculadora
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('rutaVinculaciones') }}">
+                        <i class="fas fa-users" style="font-size: 1.2em;"></i> Asociaciones
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('rutaContacto') }}">
+                        <i class="fas fa-envelope" style="font-size: 1.2em;"></i> Contacto
+                    </a>
+                </li>
+                <li class="d-flex">
+                    <a href="{{ route('infoUsuario')}}" class="nav-link">
+                        <i class="fas fa-user-circle" style="font-size: 1.5em;"></i>
+                    </a>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
+
 
     <div class="content">
         @yield('contenidoHome')

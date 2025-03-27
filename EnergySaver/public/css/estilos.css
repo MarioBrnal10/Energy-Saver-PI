@@ -35,7 +35,7 @@ body {
 
 /* Container Styles */
 .container {
-    max-width: 800px;
+    max-width: 200px;
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
@@ -111,7 +111,7 @@ body {
 
 
 .container {
-    max-width: 1200px;
+    max-width: 200px;
     margin: 2rem auto;
     padding: 1rem;
     background: #ffffffc0;

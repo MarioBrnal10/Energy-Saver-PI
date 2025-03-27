@@ -4,32 +4,133 @@
 
 @section('css-calcu')
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/calcu.css') }}">
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
 @endsection
 
 @section('contenidoCalcu')
 <style>
+    .calculadora-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 50px; /* Mayor separación entre las secciones */
+        padding: 40px 30px; /* Más espacio interno en el contenedor */
+    }
+
+    .calculator-section, .table-section {
+        flex: 1;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Sombra más suave para un look más elegante */
+    }
+
+    .calculator-section {
+        background-color: #f7fafc; /* Fondo gris claro */
+    }
+
+    .table-section {
+        background-color: #ffffff; /* Fondo blanco para las tablas */
+        border: 1px solid #ddd; /* Bordes ligeros alrededor */
+    }
+
+    h2 {
+        font-size: 1.6em;
+        font-weight: bold;
+        margin-bottom: 25px; /* Más separación en los títulos */
+        color: #2c3e50; /* Color oscuro para los títulos */
+    }
+
+    .content, .container {
+        margin-bottom: 25px; /* Más espacio entre los elementos */
+    }
+
+    .dropdown-input-container {
+        margin-bottom: 15px; /* Espacio entre los select */
+    }
+
+    .buttons {
+        margin-top: 30px; /* Más separación antes del botón */
+        text-align: center;
+    }
+
+    .buttons button {
+        padding: 15px 25px;
+        background-color:rgb(53, 165, 18); /* Color de botón atractivo */
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 8px;
+        font-size: 18px;
+        transition: background-color 0.3s ease;
+    }
+
+    .buttons button:hover {
+        background-color:rgb(12, 146, 0); /* Color más oscuro al pasar el ratón */
+    }
+
     table {
         width: 100%;
         border-collapse: collapse;
+        margin-top: 25px;
     }
 
     th, td {
-        padding: 8px;
+        padding: 18px 20px;
         text-align: left;
         border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color:rgb(15, 151, 10); /* Fondo azul claro para encabezados */
+        color: white;
+        font-weight: bold;
+    }
+
+    td {
+        font-size: 1.1em; /* Tamaño de fuente ligeramente mayor */
+    }
+
+    td button {
+        padding: 8px 15px;
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+    }
+
+    td button:hover {
+        background-color: #c0392b;
+    }
+
+    .table-section p {
+        font-size: 1.3em;
+        margin: 15px 0; /* Más separación para los párrafos */
+        color: #333;
+    }
+
+    .table-section .total-info {
+        font-weight: bold;
+        font-size: 1.2em;
+        color: #2c3e50;
+        background-color: #ecf0f1;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
     }
 </style>
 
 <div class="calculadora-container">
+    <!-- Lado izquierdo: Formulario -->
     <div class="calculator-section">
+        <h2>Configuración del Electrodoméstico</h2>
         <div class="content">
             <div class="dropdown-input-container">
                 <label for="brandOptions">Elige una Marca:</label>
                 <select id="brandOptions" name="brandOptions" onchange="updateApplianceOptions()">
                     <option value="" disabled selected>Elige una Marca</option>
-                    <!-- Las marcas se cargarán dinámicamente con JavaScript -->
                 </select>
             </div>
         </div>
@@ -39,7 +140,6 @@
                 <label for="applianceOptions">Elige un Electrodoméstico:</label>
                 <select id="applianceOptions" name="applianceOptions" onchange="displayPower()">
                     <option value="" disabled selected>Elige un Electrodoméstico</option>
-                    <!-- Los electrodomésticos se cargarán dinámicamente con JavaScript -->
                 </select>
             </div>
         </div>
@@ -53,7 +153,6 @@
             <label for="hoursInput">Introduce las horas de uso al día:</label>
             <select id="hoursInput">
                 <option value="0" disabled selected>Horas</option>
-                <!-- Generar opciones para las horas -->
                 @for ($i = 0; $i <= 24; $i++)
                     <option value="{{ $i }}">{{ $i }}</option>
                 @endfor
@@ -62,7 +161,6 @@
             <label for="minutesInput">Introduce los minutos de uso al día:</label>
             <select id="minutesInput">
                 <option value="0" disabled selected>Minutos</option>
-                <!-- Generar opciones para los minutos -->
                 @for ($i = 0; $i <= 55; $i += 5)
                     <option value="{{ $i }}">{{ $i }}</option>
                 @endfor
@@ -71,15 +169,11 @@
         
         <div class="buttons">
             <button type="button" onclick="addAppliance()">Guardar Electrodoméstico</button>
-
         </div>
     </div>
-</div>
 
-<br>
-
-<div class="table-section">
-    <div class="container">
+    <!-- Lado derecho: Tabla -->
+    <div class="table-section">
         <h2>Lista de Electrodomésticos</h2>
         <table id="applianceTable">
             <thead>
@@ -91,25 +185,21 @@
                     <th>$/Mes</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Las filas de electrodomésticos se agregarán dinámicamente con JavaScript -->
-            </tbody>
+            <tbody></tbody>
         </table>
-    </div>
 
-    <br>
-    <div>
-        <h2>Total Consumo Eléctrico y Costo</h2>
-        <p id="totalConsumption">Consumo Total: 0 kWh</p>
-        <p id="totalCost">Costo Total Mensual: $0.00</p>
+        <br>
+        <div class="total-info">
+            <h2>Total Consumo Eléctrico y Costo</h2>
+            <p id="totalConsumption">Consumo Total: 0 kWh</p>
+            <p id="totalCost">Costo Total Mensual: $0.00</p>
+        </div>
+
+        <div class="buttons">
+            <button onclick="storeDataAndRedirect()">Calcular</button>
+        </div>
     </div>
 </div>
-
-<div class="buttons">
-    <button onclick="storeDataAndRedirect()">Calcular</button>
-
-</div>
-<br>
 
 <script>
     // Llenar marcas al cargar la página
@@ -300,7 +390,5 @@
         });
     }
 </script>
-
-
 
 @endsection

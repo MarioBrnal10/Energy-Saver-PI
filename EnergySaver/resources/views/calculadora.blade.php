@@ -7,79 +7,126 @@
     <link rel="icon" href="{{ asset('img/logotipo.ico?v=2') }}" type="image/x-icon">
     <title>Calculadora</title>
     <style>
+        /* Estilos generales */
         body {
             font-family: Arial, sans-serif;
-            background-color: #117f55;
-            background-size: cover;
             margin: 0;
             padding: 0;
+            background: linear-gradient(135deg, #4CAF50, #1E7F4C);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
             color: #ffffff;
+            text-align: center;
         }
 
+        /* Header - Título */
         header {
-            background-color: #1c2833;
-            color: #ffffff;
+            width: 100%;
+            background-color: #388e3c;
+            color: white;
             padding: 20px 0;
             text-align: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 2em;
-        }
-
+        /* Barra de navegación */
         nav {
-            background-color: #1c2833;
-            padding: 10px 0;
+            width: 100%;
+            padding: 15px 0;
             text-align: center;
+            margin-bottom: 30px;
         }
 
         .nav-link {
-            margin: 0 30px;
+            margin: 0 15px;
             text-decoration: none;
-            color: #fbfbfb;
+            color: white;
+            font-size: 1.2em;
             font-weight: bold;
-            transition: color 0.3s;
-            font-size: 20px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
         }
 
         .nav-link:hover {
+            background-color: #388e3c;
+            color: #ffffff;
+        }
+
+        /* Contenedor principal */
+        .main-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        /* Título de la calculadora */
+        .main-container h2 {
+            font-size: 1.6em;
+            color: #388e3c;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        /* Estilo para los inputs y select */
+        .dropdown-input-container {
+            background-color: #ffffff;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-input-container label {
+            display: block;
+            font-size: 1.1em;
+            margin-bottom: 6px;
             color: #388e3c;
         }
 
-        .main-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            color: #000;
-        }
-
-        .dropdown-input-container {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s;
-            text-align: left;
+        .dropdown-input-container select, .dropdown-input-container input {
             width: 100%;
-            max-width: 500px;
+            padding: 8px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            margin-top: 5px;
+            color: #388e3c;
         }
 
+        .dropdown-input-container input:readonly {
+            background-color: #e5e5e5;
+        }
+
+        /* Tabla */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
+            margin-top: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
         }
 
         th, td {
-            padding: 12px 15px;
+            padding: 10px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
@@ -88,19 +135,36 @@
             background-color: #388e3c;
             color: white;
         }
+
+        /* Animación para un desvanecimiento suave */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .main-container {
+            animation: fadeIn 1s ease-in-out;
+        }
+
     </style>
 </head>
 <body>
     <header>
-        <h1>Energy Saver</h1>
+        Energy Saver
     </header>
     <nav>
         <a href="{{route('rutaInicio')}}" class="nav-link">Inicio</a>
         <a href="{{route('rutaCalculadora')}}" class="nav-link">Calculadora</a>
     </nav>
+
     <div class="main-container">
         <h2>Selecciona los detalles del electrodoméstico</h2>
 
+        <!-- Contenedor para la selección de Marca -->
         <div class="dropdown-input-container">
             <label for="brandOptions">Marca:</label>
             <select id="brandOptions" name="brandOptions" onchange="fetchElectrodomesticos(this.value)">
@@ -108,6 +172,7 @@
             </select>
         </div>
 
+        <!-- Contenedor para la selección de Electrodoméstico -->
         <div class="dropdown-input-container">
             <label for="applianceOptions">Electrodoméstico:</label>
             <select id="applianceOptions" name="applianceOptions" onchange="fetchPotencia(this.value)">
@@ -115,11 +180,13 @@
             </select>
         </div>
 
+        <!-- Contenedor para la potencia -->
         <div class="dropdown-input-container">
             <label for="numberInput">Potencia (kWh):</label>
             <input type="number" id="numberInput" readonly>
         </div>
 
+        <!-- Tabla para listar electrodomésticos -->
         <div>
             <h2>Lista de Electrodomésticos</h2>
             <table id="applianceTable">
