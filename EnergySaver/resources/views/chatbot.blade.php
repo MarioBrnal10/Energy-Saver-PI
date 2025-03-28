@@ -4,144 +4,184 @@
 
 @section('css-estilos')
     <style>
-        /* Estilos generales para el chatbot */
-        .container {
-            margin-top: 30px;
-            padding: 15px;
-        }
+         /* Fondo animado de hojas cayendo */
+    @keyframes fallLeaves {
+        0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
 
-        /* Card principal */
+    .leaf {
+        position: fixed;
+        top: -50px;
+        width: 20px;
+        height: 20px;
+        background: url('https://i.imgur.com/LGbcTqx.png') no-repeat center;
+        background-size: contain;
+        opacity: 0.8;
+        animation: fallLeaves 6s linear infinite;
+    }
+
+    /* Generar múltiples hojas */
+    .leaf:nth-child(1) { left: 5%; animation-duration: 7s; }
+    .leaf:nth-child(2) { left: 20%; animation-duration: 5s; }
+    .leaf:nth-child(3) { left: 40%; animation-duration: 6s; }
+    .leaf:nth-child(4) { left: 60%; animation-duration: 8s; }
+    .leaf:nth-child(5) { left: 80%; animation-duration: 6s; }
+
+    /* Estilos generales */
+    .container {
+        margin-top: 30px;
+        padding: 15px;
+    }
+
+    /* Card del chatbot */
+    .chat-card {
+        background-color: #eafbea;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+        border: 2px solid #4caf50;
+    }
+
+    .chat-card:hover {
+        transform: translateY(-5px);
+    }
+
+    /* Título del chatbot */
+    .chat-title {
+        font-size: 1.8em;
+        color: #2e7d32;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 25px;
+    }
+
+    /* Contenedor de mensajes */
+    #chatbot-container {
+        height: 350px;
+        overflow-y: auto;
+        background-color: #f0fff0;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        font-size: 0.9em;
+        color: #2e7d32;
+        box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
+        border: 1px solid #66bb6a;
+    }
+
+    /* Mensajes */
+    .chat-message {
+        margin-bottom: 15px;
+    }
+
+    .chat-message strong {
+        color: #388e3c;
+    }
+
+    /* Input y botón de envío */
+    .btn-send {
+        background-color: #4caf50;
+        border: none;
+        padding: 10px 20px;
+        color: white;
+        font-size: 1em;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn-send:hover {
+        background-color: #388e3c;
+        transform: scale(1.05);
+    }
+
+    .input-group input {
+        border-radius: 30px;
+        border: 2px solid #81c784;
+        padding: 10px;
+    }
+
+    .input-group input:focus {
+        border-color: #4caf50;
+        outline: none;
+    }
+
+    /* Botones de opciones */
+    .opciones-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    .opciones-container button {
+        background-color: #c8e6c9;
+        border: 1px solid #81c784;
+        padding: 8px 15px;
+        margin: 5px;
+        border-radius: 20px;
+        font-size: 0.9em;
+        color: #2e7d32;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .opciones-container button:hover {
+        background-color: #a5d6a7;
+        transform: scale(1.05);
+    }
+
+    /* Estilo del formulario */
+    .formulario-container {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #e8f5e9;
+        border-radius: 15px;
+        box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
+        border: 2px solid #66bb6a;
+    }
+
+    .formulario-container input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        border: 1px solid #a5d6a7;
+        font-size: 0.9em;
+    }
+
+    .formulario-container input:focus {
+        border-color: #4caf50;
+        outline: none;
+    }
+
+    .formulario-container button {
+        background-color: #4caf50;
+        border: none;
+        padding: 10px 20px;
+        color: white;
+        font-size: 1em;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .formulario-container button:hover {
+        background-color: #388e3c;
+    }
+
+    /* Responsividad */
+    @media (max-width: 768px) {
         .chat-card {
-            background-color: #ffffff;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .chat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        /* Título */
-        .chat-title {
-            font-size: 1.5em;
-            color: #2d87f0; /* Color de texto similar al de ClickUp */
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 25px;
-        }
-
-        /* Contenedor de mensajes */
-        #chatbot-container {
-            height: 350px;
-            overflow-y: auto;
-            background-color: #f7f7f7;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            font-size: 0.9em;
-            color: #333;
-            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Estilo para los mensajes */
-        .chat-message {
-            margin-bottom: 15px;
-        }
-
-        .chat-message strong {
-            color: #2d87f0;
-        }
-
-        /* Estilo de los botones */
-        .btn-send {
-            background-color: #2d87f0;
-            border: none;
-            padding: 10px 20px;
-            color: white;
-            font-size: 1em;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .btn-send:hover {
-            background-color: #2367c3;
-        }
-
-        /* Botones de opciones */
-        .opciones-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 15px;
-        }
-
-        .opciones-container button {
-            background-color: #e2e9f3;
-            border: 1px solid #d0dbe5;
-            padding: 8px 15px;
-            margin: 5px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            color: #555;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .opciones-container button:hover {
-            background-color: #ccd5e2;
-        }
-
-        /* Estilo de formulario */
-        .formulario-container {
-            margin-top: 20px;
             padding: 20px;
-            background-color: #f1f1f1;
-            border-radius: 15px;
-            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .formulario-container input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            border: 1px solid #ddd;
-            font-size: 0.9em;
+        #chatbot-container {
+            height: 250px;
         }
-
-        .formulario-container input:focus {
-            border-color: #2d87f0;
-            outline: none;
-        }
-
-        .formulario-container button {
-            background-color: #2d87f0;
-            border: none;
-            padding: 10px 20px;
-            color: white;
-            font-size: 1em;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .formulario-container button:hover {
-            background-color: #2367c3;
-        }
-
-        /* Responsividad */
-        @media (max-width: 768px) {
-            .chat-card {
-                padding: 20px;
-            }
-
-            #chatbot-container {
-                height: 250px;
-            }
-        }
+    }
     </style>
 @endsection
 
@@ -308,6 +348,8 @@
             inputMensaje.addEventListener('keypress', event => {
                 if (event.key === 'Enter') enviarMensaje();
             });
+            
         });
+        
     </script>
 @endsection

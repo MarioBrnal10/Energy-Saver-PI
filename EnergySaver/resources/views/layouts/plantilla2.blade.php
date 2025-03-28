@@ -189,6 +189,49 @@
                 transform: translateY(0);
             }
         }
+        /* Estilo del botón de cerrar sesión */
+    #rutaSalir button {
+        background-color: #d9534f; /* Rojo suave */
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 1em;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    #rutaSalir button:hover {
+        background-color: #c9302c; /* Rojo más oscuro */
+        transform: scale(1.05);
+    }
+
+    /* Estilos personalizados para Alertify.js */
+    .ajs-header {
+        background-color: #5cb85c !important; /* Verde de éxito */
+        color: white !important;
+        font-weight: bold;
+    }
+
+    .ajs-dialog {
+        border-radius: 10px !important;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    .ajs-footer .ajs-buttons .ajs-button {
+        border-radius: 5px !important;
+        padding: 8px 15px !important;
+    }
+
+    .ajs-ok {
+        background-color: #5cb85c !important;
+        color: white !important;
+    }
+
+    .ajs-cancel {
+        background-color: #d9534f !important;
+        color: white !important;
+    }
     </style>
 </head>
 
@@ -220,9 +263,9 @@
                         <i class="fas fa-envelope" style="font-size: 1.2em;"></i> Contacto
                     </a>
                 </li>
-                <li class="d-flex">
-                    <a href="{{ route('infoUsuario')}}" class="nav-link">
-                        <i class="fas fa-user-circle" style="font-size: 1.5em;"></i>
+                <li class="nav-item">
+                    <a href="{{ route('infoUsuario') }}" class="nav-link">
+                        <i class="fas fa-user-circle" style="font-size: 1.2em;"></i> Perfil
                     </a>
                 </li>
             </ul>
@@ -279,21 +322,21 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const logoutForm = document.getElementById("rutaSalir");
-            logoutForm.addEventListener("submit", function (e) {
-                e.preventDefault();
-                alertify.confirm(
-                    "Confirmación de Cierre de Sesión",
-                    "¿Estás seguro de que deseas cerrar sesión?",
-                    function () {
-                        logoutForm.submit();
-                    },
-                    function () {
-                        alertify.error("Acción cancelada");
-                    }
-                );
-            });
+        const logoutForm = document.getElementById("rutaSalir");
+        logoutForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            alertify.confirm(
+                "Confirmación de Cierre de Sesión",
+                "¿Estás seguro de que deseas cerrar sesión?",
+                function () {
+                    logoutForm.submit();
+                },
+                function () {
+                    alertify.error("Acción cancelada");
+                }
+            ).set({ labels: { ok: "Sí, salir", cancel: "Cancelar" } });
         });
+    });
     </script>
 
     <div class="chatbot-icon" onclick="openChat()">
